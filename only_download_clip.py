@@ -12,6 +12,7 @@ from joblib import Parallel
 import pandas as pd
 import time
 
+
 def create_video_folders(dataset, output_dir, tmp_dir):
     """Creates a directory for each label name in the dataset."""
     """if 'label-name' not in dataset.columns:
@@ -124,11 +125,9 @@ def download_clip(ind, video_identifier, output_filename,
                '"%s"' % new_output_filename]
     command = ' '.join(command)
     try:
-        output = subprocess.check_output(command, shell=True,
-                                         stderr=subprocess.STDOUT)
-
-	end_f = time.time()
-	print(str(ind)+" - ffmpeged <-")
+        output = subprocess.check_output(command, shell=True,stderr=subprocess.STDOUT)
+        end_f = time.time()
+        print(str(ind)+" - ffmpeged <-")
     except subprocess.CalledProcessError as err:
         print(str(ind)+" ! ffmpeg errorrrrrrrrrrrrr !!!!!!!!!!")
         return status, err.output
@@ -210,10 +209,11 @@ def main(input_csv, output_dir,
 
     # Download all clips.
     start = time.time()
+    print("num_jobs="+str(num_jobs))
     if num_jobs == 1:
         status_lst = []
         for i, row in dataset.iterrows():
-	    print (i)
+            print(i)
             status_lst.append(download_clip_wrapper(i, row, label_to_dir,
                                                     trim_format, tmp_dir))
     else:
@@ -222,7 +222,7 @@ def main(input_csv, output_dir,
             trim_format, tmp_dir) for i, row in dataset.iterrows())
 
     end = time.time()
-    print ("TOTAL USED: "+str(end-start)+" s......")
+    print("TOTAL USED: "+str(end-start)+" s......")
     # Clean tmp dir.
     # shutil.rmtree(tmp_dir)
 
