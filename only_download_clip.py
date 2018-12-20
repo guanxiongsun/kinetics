@@ -109,7 +109,14 @@ def download_clip(ind, video_identifier, output_filename,
     # Construct command to trim the videos (ffmpeg required).
 
     print(str(ind)+" -> ffmpeging ......")
-    new_basename = os.path.basename(output_filename).split('.')[0] + "_new.mp4"
+    ### filename is ZZfmdYrlBf4_acting in play_000184_000194_new.mp4
+    ### new_basename = os.path.basename(output_filename).split('.')[0] + "_new.mp4"
+
+    new_basename = os.path.basename(output_filename).split('.')[0] + ".mp4"
+    ### change filename to v_label_xxx.avi
+    name_parts = new_basename.split('_')
+    new_basename = "v_" + name_parts[1] + "_" + name_parts[0] + "_" + name_parts[2] + name_parts[3]
+    print(new_basename)
     new_dirname = os.path.dirname(output_filename).split('/')[0] + "_new"
     new_output_filename = os.path.join(new_dirname, new_basename)
     # print("output_filename - "+output_filename)

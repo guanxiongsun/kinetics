@@ -1,5 +1,6 @@
 val*
 kinetics_code
 train
+train_new
 data
-download_report.json
+*.json
