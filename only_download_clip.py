@@ -113,7 +113,7 @@ def download_clip(ind, video_identifier, output_filename,
     ### new_basename = os.path.basename(output_filename).split('.')[0] + "_new.mp4"
 
     new_basename = os.path.basename(output_filename).split('.')[0] + ".mp4"
-    
+
     ### change filename to v_label_xxx.avi
     name_id = new_basename[:11] # save youtube-id
     new_basename = new_basename[12:]
@@ -255,7 +255,7 @@ if __name__ == '__main__':
                    help=('This will be the format for the '
                          'filename of trimmed videos: '
                          'videoid_%0xd(start_time)_%0xd(end_time).mp4'))
-    p.add_argument('-n', '--num-jobs', type=int, default=128)
+    p.add_argument('-n', '--num-jobs', type=int, default=256)
     p.add_argument('-t', '--tmp-dir', type=str, default='/tmp/kinetics')
     p.add_argument('--drop-duplicates', type=str, default='non-existent',
                    help='Unavailable at the moment')
